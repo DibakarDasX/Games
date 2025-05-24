@@ -102,7 +102,7 @@
         }
 
         .scoreboard {
-            display: flex;
+            display: none;
             justify-content: center;
             gap: 3rem;
             margin: 1.5rem 0;
@@ -115,10 +115,20 @@
             min-height: 2rem;
         }
 
+        .visible {
+            display: flex;
+        }
+
         .hidden {
             display: none;
         }
-
+.footer {
+    margin-top: auto;
+    padding-top: 2rem;
+    font-size: 0.9rem;
+    color: #00f3ff99;
+    text-align: center;
+}
         @media (max-width: 480px) {
             h1 {
                 font-size: 2rem;
@@ -139,7 +149,7 @@
             <button onclick="startGame('computer')">🤖 vs Computer</button>
         </div>
 
-        <div class="scoreboard">
+        <div class="scoreboard hidden" id="scoreboard">
             <div>Player X: <span id="scoreX">0</span></div>
             <div>Player O: <span id="scoreO">0</span></div>
         </div>
@@ -149,6 +159,7 @@
         <div class="game-grid hidden" id="gameBoard"></div>
 
         <button class="hidden" id="newGameBtn" onclick="resetGame()">🔄 New Game</button>
+        <div class="footer">Made with ❤ by Dibakar Das</div>
     </div>
 
     <script>
@@ -171,6 +182,7 @@
             document.querySelector('.mode-buttons').classList.add('hidden');
             document.getElementById('gameBoard').classList.remove('hidden');
             document.getElementById('newGameBtn').classList.remove('hidden');
+            document.getElementById('scoreboard').classList.add('visible');
             
             if (mode === 'human') {
                 totalRounds = parseInt(prompt('How many rounds would you like to play?') || 3);
@@ -198,13 +210,14 @@
 
             makeMove(index, currentPlayer);
             
-            if (!checkWinner() && gameActive) {
-                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-                updateStatus();
-                
-                if (gameMode === 'computer' && currentPlayer === 'O') {
+            if (gameActive && !checkWinner()) {
+                if (gameMode === 'computer') {
+                    currentPlayer = 'O';
                     setTimeout(computerTurn, 600);
+                } else {
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
                 }
+                updateStatus();
             }
         }
 
@@ -218,6 +231,12 @@
             if (emptyCells.length > 0) {
                 const randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
                 makeMove(randomIndex, 'O');
+                
+                // Switch back to human player if game continues
+                if (gameActive) {
+                    currentPlayer = 'X';
+                    updateStatus();
+                }
             }
         }
 
@@ -296,6 +315,7 @@
                 document.querySelector('.mode-buttons').classList.remove('hidden');
                 document.getElementById('gameBoard').classList.add('hidden');
                 document.getElementById('newGameBtn').classList.add('hidden');
+                document.getElementById('scoreboard').classList.remove('visible');
                 document.getElementById('status').textContent = 'Choose a game mode to begin';
             } else {
                 initializeGame();
