@@ -122,13 +122,30 @@
         .hidden {
             display: none;
         }
-.footer {
-    margin-top: auto;
-    padding-top: 2rem;
-    font-size: 0.9rem;
-    color: #00f3ff99;
-    text-align: center;
-}
+        .footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            color: #00f3ff99;
+            text-align: center;
+        }
+        .donation-text {
+            color: #00f3ff99;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .donation-text a {
+            color: #ff00ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .donation-text a:hover {
+            text-decoration: underline;
+            text-shadow: 0 0 8px #ff00ff;
+        }
         @media (max-width: 480px) {
             h1 {
                 font-size: 2rem;
@@ -160,6 +177,7 @@
 
         <button class="hidden" id="newGameBtn" onclick="resetGame()">🔄 New Game</button>
         <div class="footer">Made with ❤ by Dibakar Das</div>
+        <div class="donation-text">Support me by donating <a href="#">here</a>, as this application is ad-free</div>
     </div>
 
     <script>
