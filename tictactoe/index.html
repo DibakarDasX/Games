@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games by Dibakar Das</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #0a0a1a;
+            color: #e0f7ff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 2px solid #00f7ff;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 15px #00f7ff;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #00f7ff;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .game-card {
+            background: rgba(0, 20, 40, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #00f7ff;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 25px #00f7ff;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            color: #00f7ff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #00f7ff;
+        }
+
+        .game-description {
+            font-size: 1rem;
+            color: #a0f0ff;
+            margin-bottom: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #00f7ff;
+            margin-top: 3rem;
+        }
+
+        .donate-link {
+            color: #00f7ff;
+            text-decoration: none;
+            text-shadow: 0 0 10px #00f7ff;
+        }
+
+        .donate-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Simple Games for Time Pass</h1>
+        <p>Click any game to start playing</p>
+    </header>
+
+    <div class="container">
+        <div class="games-grid" id="gamesContainer">
+            <!-- Game cards will be injected here by JavaScript -->
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with ❤ by Dibakar Das</p>
+        <p>All games are ad free, support me by donating <a href="#" class="donate-link" target="_blank">here</a></p>
+    </footer>
+
+    <script>
+        const games = [
+            {
+                title: "Tic Tac Toe",
+                description: "Classic X vs O strategy game",
+                url: "https://games.dibakardas.com/tictactoe",
+                comingSoon: false
+            },
+        ];
+
+        function renderGames() {
+            const container = document.getElementById('gamesContainer');
+            
+            games.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <a href="${game.url}" class="game-link" target="_blank">
+                        <h2 class="game-title">${game.title}</h2>
+                        <p class="game-description">${game.description}</p>
+                        ${game.comingSoon ? '<span class="coming-soon">(Coming Soon)</span>' : ''}
+                    </a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        renderGames();
+    </script>
+</body>
+</html>
